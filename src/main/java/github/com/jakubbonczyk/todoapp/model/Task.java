@@ -1,16 +1,19 @@
 package github.com.jakubbonczyk.todoapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int description;
+    @NotBlank(message = "You can't put empty prompt here!")
+    private String description;
     private boolean isDone;
+
+    Task() {}
 
     public int getId() {
         return id;
@@ -20,11 +23,11 @@ public class Task {
         this.id = id;
     }
 
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(int description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
